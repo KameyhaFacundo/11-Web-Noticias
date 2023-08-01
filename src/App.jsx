@@ -1,16 +1,28 @@
 import "./App.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { Container } from "react-bootstrap";
+import Titulo from "./components/Titulo";
+import Formulario from "./components/Formulario";
+import ListaNoticias from "./components/ListaNoticias";
 
 function App() {
   return (
     <>
-      <Container className="my-5 mainPage"></Container>
+      <Container className="my-5 mainPage">
+        <Titulo></Titulo>
+        <Formulario></Formulario>
+        <ListaNoticias></ListaNoticias>
+      </Container>
       <footer className="text-center bg-dark text-light py-4">
-        <a href="https://github.com/KameyhaFacundo" className="text-secondary">
-          Facundo Kameyha
-        </a>
-        <p>&copy; Todos los derechos reservados</p>
+        <h2 className="fs-4">
+          <a
+            href="https://github.com/KameyhaFacundo"
+            className="text-secondary"
+          >
+            Facundo Kameyha
+          </a>
+        </h2>
+        <p className="fs-4">&copy; Todos los derechos reservados</p>
       </footer>
     </>
   );
