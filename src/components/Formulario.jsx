@@ -32,7 +32,7 @@ const Formulario = () => {
       <Container className="text-center">
         <Form className="row" onSubmit={handleSubmit}>
           <Form.Group className="mb-3" controlId="tarea">
-            <Form.Label>Ingrese una categoria de noticias:</Form.Label>
+            <Form.Label></Form.Label>
             <Form.Select
               onChange={(e) => setCategoria(e.target.value)}
               value={categoria}
