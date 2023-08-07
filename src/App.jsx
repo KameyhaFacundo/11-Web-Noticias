@@ -3,15 +3,16 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import { Container } from "react-bootstrap";
 import Titulo from "./components/Titulo";
 import Formulario from "./components/Formulario";
-import ListaNoticias from "./components/ListaNoticias";
+import { useEffect } from "react";
 
 function App() {
+  useEffect(() => {}, []);
+
   return (
     <>
       <Container className="my-5 mainPage">
         <Titulo></Titulo>
         <Formulario></Formulario>
-        <ListaNoticias></ListaNoticias>
       </Container>
       <footer className="text-center bg-dark text-light py-4">
         <h2 className="fs-4">

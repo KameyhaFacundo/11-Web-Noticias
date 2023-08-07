@@ -1,37 +1,62 @@
-import React from "react";
-import { Form } from "react-bootstrap";
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { Container, Form, Button } from "react-bootstrap";
+import ListaNoticias from "./ListaNoticias";
 
 const Formulario = () => {
-  const [opcion, setOpcion] = useState("");
+  const [categoria, setCategoria] = useState("");
+  const [noticias, setNoticias] = useState([]);
+  const [mostrarNoticias, setMostrarNoticias] = useState(false);
+
+  useEffect(() => {}, []);
+
+  const consultarAPI = async () => {
+    try {
+      const respuesta = await fetch(
+        `https://newsdata.io/api/1/news?apikey=pub_24226bea9b87e0d87603664a9762b89a71aa4&category=${categoria}`
+      );
+      const dato = await respuesta.json();
+      setNoticias(dato);
+      setMostrarNoticias(true);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    setCategoria(e.target.value);
+    consultarAPI();
+  };
 
   return (
     <>
-      <Form>
-        <Form.Group controlId="genero">
-          <Form.Label className="text-white">Buscar por categoria</Form.Label>
-          <Form.Control
-            as="select"
-            value={opcion}
-            onChange={(e) => setOpcion(e.target.value)}
-            required
-          >
-            <option value="">Opciones</option>
-            <option value="business">business</option>
-            <option value="entertainment">entertainment</option>
-            <option value="environment">environment</option>
-            <option value="food">food</option>
-            <option value="health">health</option>
-            <option value="politics">politics</option>
-            <option value="science">science</option>
-            <option value="sports">sports</option>
-            <option value="technology">technology</option>
-            <option value="top">top</option>
-            <option value="tourism">tourism</option>
-            <option value="world">world</option>
-          </Form.Control>
-        </Form.Group>
-      </Form>
+      <Container className="text-center">
+        <Form className="row" onSubmit={handleSubmit}>
+          <Form.Group className="mb-3" controlId="tarea">
+            <Form.Label>Ingrese una categoria de noticias:</Form.Label>
+            <Form.Select
+              onChange={(e) => setCategoria(e.target.value)}
+              value={categoria}
+            >
+              <option>Elige una noticia</option>
+              <option value="business">Negocios</option>
+              <option value="entertainment">Entretenimiento</option>
+              <option value="world">Globales</option>
+              <option value="health">Salud</option>
+              <option value="science">Ciencia</option>
+              <option value="sports">Deportes</option>
+              <option value="technology">Tecnologia</option>
+            </Form.Select>
+            <Container className="my-3 text-center">
+              <Button variant="dark" type="submit">
+                Buscar
+              </Button>
+            </Container>
+          </Form.Group>
+        </Form>
+      </Container>
+      <Container className="row">
+        {mostrarNoticias && <ListaNoticias noticias={noticias.results} />}
+      </Container>
     </>
   );
 };

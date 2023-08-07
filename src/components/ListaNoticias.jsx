@@ -1,17 +1,13 @@
-import React from "react";
-import Noticia from "./Noticia";
-import { Row, Col } from "react-bootstrap";
+import { Container } from "react-bootstrap";
+import Noticias from "./Noticia";
 
-const ListaNoticias = () => {
+const ListaNoticias = ({ noticias }) => {
   return (
-    <>
-      <Row xs={1} lg={3} md={2} sm={3} xl={4} className="g-4">
-        <Col>
-          <Noticia></Noticia>
-          <Noticia></Noticia>
-        </Col>
-      </Row>
-    </>
+    <Container className="row justify-content-center">
+      {noticias.map((noticia, index) => (
+        <Noticias noticia={noticia} key={index} className="col-lg-2 col-md-4" />
+      ))}
+    </Container>
   );
 };
 
